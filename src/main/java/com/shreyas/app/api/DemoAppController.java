@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shreyas.app.model.BinRange;
 import com.shreyas.app.service.IBinRangeService;
 
 @RestController
@@ -21,8 +20,8 @@ public class DemoAppController {
 	/**
 	 * Retrieve list of BINLookup entries in XML format for given query params. 
 	 */
-	@RequestMapping("/binrange/")
-	public BinRange getBinRangeXML(@RequestParam MultiValueMap<String, String> ccnumbers) {
+	@RequestMapping(value = "/binrange/xml")
+	public String getBinRangeXML(@RequestParam MultiValueMap<String, String> ccnumbers) {
 		return binRangeService.getBinRangeXML(ccnumbers);
 	}
 
@@ -30,7 +29,7 @@ public class DemoAppController {
 	 * Retrieve list of BINLookup entries in JSON format for given query params
 	 */
 	@RequestMapping("/binrange/json")
-	public BinRange getBinRangeJSON(@RequestParam MultiValueMap<String, String> ccnumbers) {
+	public String getBinRangeJSON(@RequestParam MultiValueMap<String, String> ccnumbers) {
 		return binRangeService.getBinRangeJSON(ccnumbers);
 	}
 	

@@ -20,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.shreyas.app.exception.RestApiConsumerException;
-import com.shreyas.app.model.BinRange;
 
 @Service
 public class BinRangeService implements IBinRangeService {
@@ -35,7 +34,7 @@ public class BinRangeService implements IBinRangeService {
 	private static final String BIN_RANGE_JSON = "url.binrange.json";
 
 	@Override
-	public BinRange getBinRangeXML(MultiValueMap<String, String> ccnumbers) {
+	public String getBinRangeXML(MultiValueMap<String, String> ccnumbers) {
 		
 		// Create uri query
 		UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(env.getProperty(BIN_RANGE));
@@ -44,18 +43,28 @@ public class BinRangeService implements IBinRangeService {
 
 		// Add headers
 		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_XML);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
-
-		// Create and execute the GET call
-		HttpEntity<String> entity = new HttpEntity<>(headers);
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<BinRange> binRange = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, entity, BinRange.class);
 		
-		return binRange.getBody();
+		ResponseEntity<String> response = null;
+
+		try {
+
+			// Create and execute the GET call
+			HttpEntity<String> entity = new HttpEntity<>(headers);
+			RestTemplate restTemplate = new RestTemplate();
+			response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, entity, String.class);
+			
+		} catch(Exception e) {
+			log.error(e.getLocalizedMessage(), e);
+			throw new RestApiConsumerException(e.getMessage(), e);
+		}
+		
+		return response.getBody();
 	}
 
 	@Override
-	public BinRange getBinRangeJSON(MultiValueMap<String, String> ccnumbers) {
+	public String getBinRangeJSON(MultiValueMap<String, String> ccnumbers) {
 		
 		// Create uri query
 		UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(env.getProperty(BIN_RANGE_JSON));
@@ -64,16 +73,27 @@ public class BinRangeService implements IBinRangeService {
 
 		// Add headers
 		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-
-		// Create and execute the GET call
-		HttpEntity<String> entity = new HttpEntity<>(headers);
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<BinRange> binRange = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, entity, BinRange.class);
 		
-		return binRange.getBody();
+		ResponseEntity<String> response = null;
+
+		try {
+
+			// Create and execute the GET call
+			HttpEntity<String> entity = new HttpEntity<>(headers);
+			RestTemplate restTemplate = new RestTemplate();
+			response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, entity, String.class);
+			
+		} catch(Exception e) {
+			log.error(e.getLocalizedMessage(), e);
+			throw new RestApiConsumerException(e.getMessage(), e);
+		}
+		
+		return response.getBody();
 	}
 
+	@Override
 	public String getBinRangeJSON(String jsonBody) {
 		
 		
