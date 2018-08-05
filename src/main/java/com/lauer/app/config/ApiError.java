@@ -1,4 +1,4 @@
-package com.shreyas.app.config;
+package com.lauer.app.config;
 
 import org.springframework.http.HttpStatus;
 

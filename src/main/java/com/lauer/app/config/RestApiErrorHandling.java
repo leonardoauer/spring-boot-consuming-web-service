@@ -1,4 +1,4 @@
-package com.shreyas.app.config;
+package com.lauer.app.config;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.shreyas.app.exception.RestApiConsumerException;
+import com.lauer.app.exception.RestApiConsumerException;
 
 /**
  * Global Exception Handler

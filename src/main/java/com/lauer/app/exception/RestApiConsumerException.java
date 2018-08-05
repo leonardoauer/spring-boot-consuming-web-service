@@ -1,4 +1,4 @@
-package com.shreyas.app.exception;
+package com.lauer.app.exception;
 
 /**
  * Custom Exception

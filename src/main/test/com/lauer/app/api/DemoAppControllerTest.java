@@ -1,4 +1,4 @@
-package com.shreyas.app.api;
+package com.lauer.app.api;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;

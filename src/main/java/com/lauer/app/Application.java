@@ -1,4 +1,4 @@
-package com.shreyas.app;
+package com.lauer.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
