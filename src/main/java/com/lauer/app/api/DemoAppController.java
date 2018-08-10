@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lauer.app.api.dto.ApiResultDTO;
 import com.lauer.app.api.endpoints.ApiEndpoints;
+import com.lauer.app.api.properties.ApiDataProperties;
 import com.lauer.app.service.IDemoAppService;
 
 @RestController
@@ -24,25 +24,25 @@ public class DemoAppController {
 	private Environment env;
 	
 	@RequestMapping(value = "/binrange", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ApiResultDTO binRangeByGETJson(@RequestParam MultiValueMap<String, String> ccnumber) {
+	public ApiDataProperties binRangeByGETJson(@RequestParam MultiValueMap<String, String> ccnumber) {
 		String requestURL = env.getProperty(ApiEndpoints.BIN_RANGE) + "/json";
 		return srv.getBinRange(requestURL, ccnumber, MediaType.APPLICATION_JSON);
 	}
 	
 	@RequestMapping(value = "/binrange", consumes = MediaType.APPLICATION_XML_VALUE)
-	public ApiResultDTO binRangeByGETXml(@RequestParam MultiValueMap<String, String> ccnumbers) {
+	public ApiDataProperties binRangeByGETXml(@RequestParam MultiValueMap<String, String> ccnumbers) {
 		String requestURL = env.getProperty(ApiEndpoints.BIN_RANGE);
 		return srv.getBinRange(requestURL, ccnumbers, MediaType.APPLICATION_XML);
 	}
 	
 	@RequestMapping(value = "/binrange", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ApiResultDTO binRangeByPOSTJson(@RequestBody String body) {
+	public ApiDataProperties binRangeByPOSTJson(@RequestBody String body) {
 		String requestURL = env.getProperty(ApiEndpoints.BIN_RANGE);
 		return srv.getBinRange(requestURL, body, MediaType.APPLICATION_JSON);
 	}	
 
 	@RequestMapping(value = "/binrange", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
-	public ApiResultDTO binRangeByPOSTXml(@RequestBody String body) {
+	public ApiDataProperties binRangeByPOSTXml(@RequestBody String body) {
 		String requestURL = env.getProperty(ApiEndpoints.BIN_RANGE);
 		return srv.getBinRange(requestURL, body, MediaType.APPLICATION_XML);
 	}	

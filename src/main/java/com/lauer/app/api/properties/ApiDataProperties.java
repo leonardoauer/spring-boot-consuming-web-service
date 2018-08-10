@@ -1,8 +1,8 @@
-package com.lauer.app.api.dto;
+package com.lauer.app.api.properties;
 
 import org.springframework.util.MultiValueMap;
 
-public class ApiResultDTO {
+public class ApiDataProperties {
 
 	private String response;
 	private String requestURL;
